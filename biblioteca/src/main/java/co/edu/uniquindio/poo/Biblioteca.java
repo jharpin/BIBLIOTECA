@@ -19,11 +19,15 @@ public class Biblioteca {
         libros = new LinkedList<>();
         estudiantes = new LinkedList<>();
     }
-
+/*
+ *  Metodo para tomar el nombre
+ */
     public String getNombre() {
         return nombre;
     }
-
+/*
+ * Metodo para modificar el nombre
+ */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
