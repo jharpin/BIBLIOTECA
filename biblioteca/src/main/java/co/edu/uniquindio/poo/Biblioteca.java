@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo;
-
+/*
+ * Importaciones
+ */
 import java.util.Collection;
 import java.util.LinkedList;
 /*

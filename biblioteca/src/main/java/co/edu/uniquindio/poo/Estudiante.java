@@ -4,7 +4,9 @@ package co.edu.uniquindio.poo;
  */
 import java.util.Collection;
 import java.util.LinkedList;
-
+/*
+ * Clase estudiante que toma libros de la biblioteca por medio de prestamos
+ */
 public class Estudiante extends Persona {
 
     private boolean estado;

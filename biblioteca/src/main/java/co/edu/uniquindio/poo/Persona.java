@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo;
-
+/*
+ * Clase Padre Persona, la cual contiene los datos de una persona en general, con esta misma se parte para hacer bibliotecario y estudiante.
+ */
 public class Persona {
 
     private String nombre;

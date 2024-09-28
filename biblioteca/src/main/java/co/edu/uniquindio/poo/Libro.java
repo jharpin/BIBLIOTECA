@@ -3,7 +3,9 @@ package co.edu.uniquindio.poo;
  *Importaciones
  */
 import java.time.LocalDate;
-
+/*
+ * Clase  que representa un libro en la biblioteca
+ */
 public class Libro {
 
     private String codigo, isbn, autor, titulo, editorial;
