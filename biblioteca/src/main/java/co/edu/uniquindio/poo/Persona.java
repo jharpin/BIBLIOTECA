@@ -7,7 +7,7 @@ public class Persona {
     private String correo;
     private int telefono;
 /*
- * Metodo constructor
+ * Metodo constructor de la clase persona
  */
     public Persona(String nombre, String cedula, String correo, int telefono) {
         this.nombre = nombre;

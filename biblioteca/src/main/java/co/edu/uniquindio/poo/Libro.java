@@ -10,7 +10,9 @@ public class Libro {
     private int unidadesDisponibles;
     private LocalDate fechaPublicacion;
     private boolean estado;
-
+/*
+ * Metodo constructor de la clase persona
+ */
     public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int unidadesDisponibles, LocalDate fechaPublicacion){
         this.codigo=codigo;
         this.isbn=isbn;
