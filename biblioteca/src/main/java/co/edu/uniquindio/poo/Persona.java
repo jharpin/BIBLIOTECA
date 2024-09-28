@@ -6,7 +6,9 @@ public class Persona {
     private String cedula;
     private String correo;
     private int telefono;
-
+/*
+ * Metodo constructor
+ */
     public Persona(String nombre, String cedula, String correo, int telefono) {
         this.nombre = nombre;
         this.cedula = cedula;
