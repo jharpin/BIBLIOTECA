@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 /*
  *  Clase de una biblioteca, Almacena información sobre
- * bibliotecarios, préstamos, libros, estudiantes y el dinero recaudado...
+ * bibliotecarios, préstamos, libros, estudiantes y el dinero recaudado.
  */  
 public class Biblioteca {
     private String nombre;
