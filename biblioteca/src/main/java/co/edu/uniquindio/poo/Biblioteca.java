@@ -67,11 +67,15 @@ public class Biblioteca {
     public void setPrestamos(Collection<Prestamo> prestamos) {
         this.prestamos = prestamos;
     }
-
+/*
+ * Metodo para tomar la lista de libros
+ */
     public Collection<Libro> getLibros() {
         return libros;
     }
-
+/*
+ * Metodo para modificar la lista de libros
+ */
     public void setLibros(Collection<Libro> libros) {
         this.libros = libros;
     }
