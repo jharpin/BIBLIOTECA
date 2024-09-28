@@ -31,27 +31,39 @@ public class Biblioteca {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+/*
+ * Metodo para tomar el TotalDinerorecaudo
+ */
     public double getTotalDineroRecaudo() {
         return totalDineroRecaudo;
     }
-
+/*
+ * Metodo para modificar el dato TotalDineroRecaudo
+ */
     public void setTotalDineroRecaudo(double totalDineroRecaudo) {
         this.totalDineroRecaudo = totalDineroRecaudo;
     }
-
+/*
+ * Metodo para tomar la lista de bibliotecarios
+ */
     public Collection<Bibliotecario> getBibliotecarios() {
         return bibliotecarios;
     }
-
+/*
+ * Metodo para modificar la lista de bibliotecarios
+ */
     public void setBibliotecarios(Collection<Bibliotecario> bibliotecarios) {
         this.bibliotecarios = bibliotecarios;
     }
-
+/*
+ * Metodo para tomar la lista de prestamos
+ */
     public Collection<Prestamo> getPrestamos() {
         return prestamos;
     }
-
+/*
+ * Metodo para modificar la lista de prestamos
+ */
     public void setPrestamos(Collection<Prestamo> prestamos) {
         this.prestamos = prestamos;
     }
