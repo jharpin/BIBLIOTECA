@@ -43,9 +43,19 @@ public class Prestamo {
     /* Método para agregar detalles al préstamo */
     public void agregarDetallePrestamo(DetallePrestamo detalle) {
         detallePrestamos.add(detalle);
-        this.total = calcularTotal(); // Asegura que el total se actualice
+        this.total = calcularTotal(); 
     }
-    // Getters y setters...
+    /*metodo para buscar detalle por libro */
+    public DetallePrestamo buscarDetallePorLibro(Libro libro) {
+        for (DetallePrestamo detalle : detallePrestamos) {
+            if (detalle.getLibro().equals(libro)) {
+                return detalle;
+            }
+        }
+        return null;
+    }
+    
+    /* Métodos getters y setters*/
     
     public String getCodigo() {
         return codigo;
@@ -109,7 +119,7 @@ public class Prestamo {
 
     @Override
     public String toString() {
-        this.total = calcularTotal(); // Recalcula el total antes de mostrarlo
+        this.total = calcularTotal(); 
         String detalles = detallePrestamos.isEmpty() ? "No hay detalles de préstamo" : detallePrestamos.toString();
         return "Préstamo [ID=" + id +
                ", Código=" + codigo +

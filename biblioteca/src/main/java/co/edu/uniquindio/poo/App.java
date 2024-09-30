@@ -60,26 +60,26 @@ public class App {
         }
 
         /* Crear y gestionar préstamos */
-        LocalDate fechaPrestamo1 = LocalDate.now(); // Fecha de préstamo actual
-        LocalDate fechaEntrega1 = fechaPrestamo1.plusDays(5); // Fecha de entrega 5 días después
+        LocalDate fechaPrestamo1 = LocalDate.now();
+        LocalDate fechaEntrega1 = fechaPrestamo1.plusDays(5);
         biblioteca.crearPrestamo("P001", fechaPrestamo1, fechaEntrega1, bibliotecario1, estudiante1, 1);
-        biblioteca.adicionarLibroPrestamo("P001", libro1, 2, 200); // Añadir 2 unidades de "Don Quijote"
-        biblioteca.adicionarLibroPrestamo("P001", libro2, 1, 350); // Añadir 1 unidad de "Guerra y Paz"
+        biblioteca.adicionarLibroPrestamo("P001", libro1, 2, 200);
+        biblioteca.adicionarLibroPrestamo("P001", libro2, 5, 350); 
    
-        LocalDate fechaPrestamo3 = LocalDate.now(); // Fecha de préstamo actual
-        LocalDate fechaEntrega3 = fechaPrestamo3.plusDays(6); // Fecha de entrega 5 días después
+        LocalDate fechaPrestamo3 = LocalDate.now();
+        LocalDate fechaEntrega3 = fechaPrestamo3.plusDays(6); 
         biblioteca.crearPrestamo("P003", fechaPrestamo3, fechaEntrega3, bibliotecario1, estudiante2, 3);
         biblioteca.adicionarLibroPrestamo("P003", libro1, 2, 200);
         
-        LocalDate fechaPrestamo4 = LocalDate.now(); // Fecha de préstamo actual
-        LocalDate fechaEntrega4 = fechaPrestamo4.plusDays(7); // Fecha de entrega 5 días después
+        LocalDate fechaPrestamo4 = LocalDate.now();
+        LocalDate fechaEntrega4 = fechaPrestamo4.plusDays(7);
         biblioteca.crearPrestamo("P004", fechaPrestamo4, fechaEntrega4, bibliotecario1, estudiante2, 4);
         biblioteca.adicionarLibroPrestamo("P004", libro1, 3, 200);
 
-        LocalDate fechaPrestamo2 = LocalDate.now(); // Fecha de préstamo actual
-        LocalDate fechaEntrega2 = fechaPrestamo2.plusDays(3); // Fecha de entrega 3 días después
+        LocalDate fechaPrestamo2 = LocalDate.now(); 
+        LocalDate fechaEntrega2 = fechaPrestamo2.plusDays(3);
         biblioteca.crearPrestamo("P002", fechaPrestamo2, fechaEntrega2, bibliotecario2, estudiante2, 2);
-        biblioteca.adicionarLibroPrestamo("P002", libro3, 1, 350); // Añadir 1 unidad de "Hamlet"
+        biblioteca.adicionarLibroPrestamo("P002", libro3, 10, 350); 
         
     
 
@@ -116,8 +116,8 @@ public class App {
         }
         /* Entregar préstamos y calcular el costo */
         System.out.println("\n--- Entregando Préstamos ---");
-        entregarPrestamo(biblioteca, "P001", fechaEntrega1); // Entregar según la fecha establecida
-        entregarPrestamo(biblioteca, "P002", fechaEntrega2); // Entregar según la fecha establecida
+        entregarPrestamo(biblioteca, "P001", fechaEntrega1);
+        entregarPrestamo(biblioteca, "P002", fechaEntrega2); 
 
         /* Mostrar reportes */
         mostrarReportes(biblioteca);
@@ -127,7 +127,7 @@ public class App {
     public static void entregarPrestamo(Biblioteca biblioteca, String codigoPrestamo, LocalDate fechaEntrega) {
         Prestamo prestamo = biblioteca.buscarPrestamoPorCodigo(codigoPrestamo);
         if (prestamo != null) {
-            prestamo.setFechaEntrega(fechaEntrega); // Actualizar la fecha de entrega
+            prestamo.setFechaEntrega(fechaEntrega); 
             double totalPrestamo = prestamo.calcularTotal();
             biblioteca.setTotalDineroRecaudo(biblioteca.getTotalDineroRecaudo() + totalPrestamo);
             System.out.println("Costo del préstamo " + codigoPrestamo + ": " + totalPrestamo);
@@ -164,16 +164,16 @@ public class App {
 /*
  * 
  */
-        String codigoPrestamoBuscar = "P001"; // Código del préstamo que deseas buscar
+        String codigoPrestamoBuscar = "P001"; 
     Prestamo prestamoEncontrado = biblioteca.buscarPrestamoPorCodigo(codigoPrestamoBuscar);
     
     if (prestamoEncontrado != null) {
         System.out.println("Préstamo encontrado: " + prestamoEncontrado.getCodigo());
-        // Aquí puedes mostrar más detalles del préstamo encontrado si es necesario
+     
         System.out.println("Detalles del préstamo:");
         System.out.println("Fecha de préstamo: " + prestamoEncontrado.getFechaPrestamo());
         System.out.println("Fecha de entrega: " + prestamoEncontrado.getFechaEntrega());
-        // Puedes iterar sobre el detalle del préstamo si tienes esa información
+     
         for (DetallePrestamo detalle : prestamoEncontrado.getDetallePrestamos()) {
             System.out.println(detalle.toString());
         }

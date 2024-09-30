@@ -111,14 +111,23 @@ public class Biblioteca {
     public void adicionarLibroPrestamo(String codigoPrestamo, Libro libro, int cantidad, double costoPorDia) {
         Prestamo prestamo = buscarPrestamoPorCodigo(codigoPrestamo);
         if (prestamo != null) {
-            DetallePrestamo detalle = new DetallePrestamo(cantidad, prestamo, libro, costoPorDia);
-            prestamo.agregarDetallePrestamo(detalle);
-            libro.prestar(cantidad);
+            
+            DetallePrestamo detalleExistente = prestamo.buscarDetallePorLibro(libro);
+            
+            if (detalleExistente == null) {
+        
+                DetallePrestamo detalle = new DetallePrestamo(cantidad, prestamo, libro, costoPorDia);
+                prestamo.agregarDetallePrestamo(detalle);
+                libro.prestar(cantidad); 
+            } else {
+               
+                detalleExistente.setCantidad(detalleExistente.getCantidad() + cantidad);
+                libro.prestar(cantidad); 
+            }
         } else {
             System.out.println("Préstamo no encontrado con el código: " + codigoPrestamo);
         }
-    }
-            
+    }      
         
     
     
@@ -191,6 +200,8 @@ public String contarLibrosRestantes() {
     public int calcularAntiguedad(Bibliotecario bibliotecario) {
         return LocalDate.now().getYear() - bibliotecario.getFechaIngreso().getYear();
     }
+
+  /* Métodos getters y setters*/ 
     public String getNombre() {
         return nombre;
     }
