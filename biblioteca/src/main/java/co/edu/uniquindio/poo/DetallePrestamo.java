@@ -6,18 +6,20 @@ public class DetallePrestamo {
     private Prestamo prestamo;
     private Libro libro;
     private double subTotal;
+    private double costoPorDia = 2.0; 
 
     public DetallePrestamo(int cantidad, Prestamo prestamo, Libro libro){
         this.cantidad=cantidad;
         this.prestamo=prestamo;
         this.libro=libro;
-        //this.subTotal=calcularSubtotal();
+        this.subTotal=calcularSubtotal();
     }
 
-    /*public double calcularSubtotal(){
-        return cantidad*libro.get
-    }*/
-
+     /*Metodo subtotal */
+     public double calcularSubtotal() {
+        long diasPrestamo = prestamo.calcularDiasPrestamo(); 
+        return cantidad * diasPrestamo * costoPorDia; 
+    }
     public int getCantidad() {
         return cantidad;
     }

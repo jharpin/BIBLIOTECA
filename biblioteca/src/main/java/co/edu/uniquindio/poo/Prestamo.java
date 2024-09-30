@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -22,12 +23,23 @@ public class Prestamo {
         this.total = calcularTotal();
     }
 
+    /*Método para calcular el total del préstamo*/
     public double calcularTotal() {
         double total = 0;
         for (DetallePrestamo detallePrestamo : detallePrestamos) {
-            total += detallePrestamo.getSubTotal();
+            total += detallePrestamo.calcularSubtotal(); // Sumar el subtotal de cada detalle de préstamo
         }
         return total;
+    }
+
+    /*  Método para calcular la cantidad de días del préstamo*/
+    public long calcularDiasPrestamo() {
+        return ChronoUnit.DAYS.between(fechaPrestamo, fechaEntrega); // Días entre la fecha de préstamo y entrega
+    }
+    /*Metodo para agregar detalles al prestamo */
+    public void agregarDetallePrestamo(DetallePrestamo detalle) {
+        detallePrestamos.add(detalle);
+        this.total = calcularTotal(); 
     }
 
     public String getCodigo() {

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -15,6 +16,17 @@ public class Bibliotecario extends Persona {
         this.salario=salario;
         this.fechaIngreso=fechaIngreso;
         prestamos = new LinkedList<>();
+    }
+    /*Metodo para calcular el salario */
+    public double calcularSalario() {
+        double totalComision = 0;
+        for (Prestamo prestamo : prestamos) {
+            totalComision += prestamo.getTotal() * 0.2; // 20% de comisión por cada préstamo
+        }
+    /*  Bonificación de 2% por cada año de antigüedad*/
+    int aniosAntiguedad = (int) ChronoUnit.YEARS.between(fechaIngreso, LocalDate.now());
+        double bonificacion = totalComision * 0.02 * aniosAntiguedad;
+        return salario + totalComision + bonificacion;
     }
 
     public double getSalario() {
