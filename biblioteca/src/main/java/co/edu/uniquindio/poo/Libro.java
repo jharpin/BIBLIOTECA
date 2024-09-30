@@ -24,6 +24,24 @@ public class Libro {
         this.unidadesDisponibles=unidadesDisponibles;
         this.fechaPublicacion=fechaPublicacion;
     }
+    /*Metodo para prestar libros */
+    public void prestar(int cantidad) {
+        if (unidadesDisponibles >= cantidad) {
+            unidadesDisponibles -= cantidad;
+            actualizarEstado();
+        } else {
+            System.out.println("No hay suficientes unidades disponibles para prestar.");
+        }
+    }
+    /* Metodo para devolver libros*/
+    public void devolver(int cantidad) {
+        unidadesDisponibles += cantidad;
+        actualizarEstado();
+    }
+    /*Metodo para actualizar librps */
+    private void actualizarEstado() {
+        this.estado = unidadesDisponibles > 0;
+    }   
 /*
  *  Metodo para tomar el codigo
  */
