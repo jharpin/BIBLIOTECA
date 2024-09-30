@@ -1,10 +1,7 @@
 package co.edu.uniquindio.poo;
 
 import java.time.LocalDate;
-/**
- * Hello world!
- *
- */
+
 public class App {
     public static void main(String[] args) {
         /* Crear la biblioteca */
@@ -29,6 +26,35 @@ public class App {
         biblioteca.agregarLibro(libro1);
         biblioteca.agregarLibro(libro2);
         biblioteca.agregarLibro(libro3);
+        /*metodo para mostrar los libors antes del remplazo  */
+        System.out.println("Libros en la biblioteca antes del reemplazo:");
+        for (Libro libro : biblioteca.getLibros()) {
+            System.out.println(libro.getTitulo());
+        }
+
+        /* Reemplazar un libro existente */
+        Libro libroNuevo = new Libro("001", "ISBN125", "Cervantes", "El principito", "Editorial1", 25, LocalDate.of(2024, 1, 1));
+        biblioteca.reemplazarLibro(libroNuevo);
+
+        // Mostrar libros después del reemplazo
+        System.out.println("Libros en la biblioteca después del reemplazo:");
+        for (Libro libro : biblioteca.getLibros()) {
+            System.out.println(libro.getTitulo());
+        }
+        
+        /*metodo para encontrar la informacion de un libro por su codigo  */
+        String codigoBuscar = "001";  
+        Libro libroEncontrado = biblioteca.buscarLibroPorCodigo(codigoBuscar);
+        if (libroEncontrado != null) {
+            System.out.println("Libro encontrado: " + libroEncontrado.getTitulo() + " por " + libroEncontrado.getAutor());
+        } else {
+            System.out.println("No se encontró ningún libro con el código: " + codigoBuscar);
+        }
+       /*contador de veces que se a prestado un libro por su titulo */
+        String tituloBuscar = "Don Quijote"; 
+        int cantidadPrestamos = biblioteca.consultarPrestamosPorTitulo(tituloBuscar);
+        System.out.println("El libro '" + tituloBuscar + "' ha sido prestado " + cantidadPrestamos + " veces.");
+      
 
         /* Crear y gestionar préstamos */
         LocalDate fechaPrestamo1 = LocalDate.now(); // Fecha de préstamo actual

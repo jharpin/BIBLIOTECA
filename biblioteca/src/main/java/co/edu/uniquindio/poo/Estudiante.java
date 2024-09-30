@@ -14,11 +14,17 @@ public class Estudiante extends Persona {
 /*
  * Metodo contructor para la clase estudiannte 
  */
+
     public Estudiante(String nombre, String cedula, String correo, int telefono, boolean estado) {
         super(nombre, cedula, correo, telefono);
         this.estado = estado;
         prestamos = new LinkedList<>();
     }
+
+    public void agregarPrestamo(Prestamo prestamo) {
+        prestamos.add(prestamo);
+    }
+    
 /*
  *  Metodo para tomar el estado del estudiante 
  */
