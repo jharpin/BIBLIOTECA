@@ -1,13 +1,9 @@
 package co.edu.uniquindio.poo;
-/*
- * Importaciones
- */
+
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
-/*
- *  Clase de una biblioteca, Almacena información sobre
- * bibliotecarios, préstamos, libros, estudiantes y el dinero recaudado.
- */  
+
 public class Biblioteca {
     private String nombre;
     private double totalDineroRecaudo;
@@ -15,9 +11,7 @@ public class Biblioteca {
     private Collection<Prestamo> prestamos;
     private Collection<Libro> libros;
     private Collection<Estudiante> estudiantes;
- /*
- *  Metodo constructor de la clase biblioteca 
- */   
+
     public Biblioteca(String nombre, double totalDineroRecaudo) {
         this.nombre = nombre;
         this.totalDineroRecaudo = totalDineroRecaudo;
@@ -26,142 +20,220 @@ public class Biblioteca {
         libros = new LinkedList<>();
         estudiantes = new LinkedList<>();
     }
-/*
- *  Metodo para tomar el nombre
- */
-    public String getNombre() {
-        return nombre;
-    }
-/*
- * Metodo para modificar el nombre
- */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-/*
- * Metodo para tomar el TotalDinerorecaudo
- */
-    public double getTotalDineroRecaudo() {
-        return totalDineroRecaudo;
-    }
-/*
- * Metodo para modificar el dato TotalDineroRecaudo
- */
-    public void setTotalDineroRecaudo(double totalDineroRecaudo) {
-        this.totalDineroRecaudo = totalDineroRecaudo;
-    }
-/*
- * Metodo para tomar la lista de bibliotecarios
- */
-    public Collection<Bibliotecario> getBibliotecarios() {
-        return bibliotecarios;
-    }
-/*
- * Metodo para modificar la lista de bibliotecarios
- */
-    public void setBibliotecarios(Collection<Bibliotecario> bibliotecarios) {
-        this.bibliotecarios = bibliotecarios;
-    }
-/*
- * Metodo para tomar la lista de prestamos
- */
-    public Collection<Prestamo> getPrestamos() {
-        return prestamos;
-    }
-/*
- * Metodo para modificar la lista de prestamos
- */
-    public void setPrestamos(Collection<Prestamo> prestamos) {
-        this.prestamos = prestamos;
-    }
-/*
- * Metodo para tomar la lista de libros
- */
-    public Collection<Libro> getLibros() {
-        return libros;
-    }
-/*
- * Metodo para modificar la lista de libros
- */
-    public void setLibros(Collection<Libro> libros) {
-        this.libros = libros;
-    }
-/*
- * Metodo para tomar la lista de estudiantes
- */
-    public Collection<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-/*
- * Metodo para modificar la lista de estudiantes
- */
-    public void setEstudiantes(Collection<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
-    }
-/*
- * Metodo para representar los datos en forma de cadena de la biblioteca
- */
-    @Override
-    public String toString() {
-        return "Biblioteca [nombre=" + nombre + ", totalDineroRecaudo=" + totalDineroRecaudo + ", bibliotecarios="
-                + bibliotecarios + ", prestamos=" + prestamos + ", libros=" + libros + ", estudiantes=" + estudiantes
-                + "]";
-    }
-/*
- * Metodo para agregar un bibliotecario a la lista de bibliotecarios
- */
-    public void agregarBibliotecario (Bibliotecario bibliotecario) {
+    /*  Método para agregar un bibliotecario*/
+    public void agregarBibliotecario(Bibliotecario bibliotecario) {
         bibliotecarios.add(bibliotecario);
+        System.out.println("Bibliotecario agregado exitosamente: " + bibliotecario.getNombre());
     }
 
-/*
- * Metodo para agregar estudiantes a la lista de estudiantes
- */
-    public void agregarEstudiante (Estudiante estudiante) {
+    /*  Método para agregar un estudiante*/
+    public void agregarEstudiante(Estudiante estudiante) {
         estudiantes.add(estudiante);
+        System.out.println("Estudiante agregado exitosamente: " + estudiante.getNombre());
     }
 
-/*
- * Metodo para agregar libros a la lista de libros
- */
-    public void agregarLibro (Libro libro) {
-        libros.add(libro);
+    /* Metodo para consultar datos de un bibliotecario dado su cédula*/
+    public Bibliotecario consultarBibliotecario(String cedula) {
+        for (Bibliotecario bibliotecario : bibliotecarios) {
+            if (bibliotecario.getCedula().equals(cedula)) {
+                return bibliotecario;
+            }
+        }
+        System.out.println("No se encontró un bibliotecario con la cédula: " + cedula);
+        return null;
     }
-/*
- * Metodo para crear un prestamo y añadirlo a la lista de prestamos
- */
-    public void crearPrestamo (Prestamo prestamo) {
-        prestamos.add(prestamo);
+
+    /* Metodo para consultar datos de un estudiante dado su cédula*/
+    public Estudiante consultarEstudiante(String cedula) {
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getCedula().equals(cedula)) {
+                return estudiante;
+            }
+        }
+        System.out.println("No se encontró un estudiante con la cédula: " + cedula);
+        return null;
     }
-/*
- * Metodo para consultar un libro en la lista de libros
- * El libro se busca mediante su CODIGO
- */
-    public Libro buscarLibro (String codigo) {
+
+    public void agregarLibro(Libro libro) {
+        if (buscarLibroPorCodigo(libro.getCodigo()) == null) {
+            libros.add(libro);
+            System.out.println("Libro agregado exitosamente: " + libro.getTitulo());
+        } else {
+            System.out.println("El libro con código " + libro.getCodigo() + " ya existe.");
+        }
+    }
+
+    /* Método para buscar un libro por su código*/
+    public Libro buscarLibroPorCodigo(String codigo) {
         for (Libro libro : libros) {
             if (libro.getCodigo().equals(codigo)) {
                 return libro;
             }
         }
         return null;
- // no se si deberia poner un elif para pone un mensaje diciendo que el libro no existe   
     }
-/*
- * Metodo para consultar los prestamos que estan involucrados por libro
- *
-    public int prestamosPorLibro (String titulo) {
+
+    /*  Método para consultar préstamos de un libro por su título*/
+    public int consultarPrestamosPorTitulo(String titulo) {
         int contador = 0;
-        for (Prestamo prestamo: prestamos) {
-            for (Libro libro : prestamo.getLibros()){
-                if (libro.getTitulo().equals(titulo)) {
+        for (Prestamo prestamo : prestamos) {
+            for (DetallePrestamo detalle : prestamo.getDetallePrestamos()) {
+                if (detalle.getLibro().getTitulo().equals(titulo)) {
                     contador++;
                 }
             }
-
         }
         return contador;
     }
-*/
+
+    /*  Método para reemplazar un libro por otro*/
+    public void reemplazarLibro(Libro libroNuevo) {
+        Libro libroExistente = buscarLibroPorCodigo(libroNuevo.getCodigo());
+        if (libroExistente != null) {
+            libros.remove(libroExistente);
+            libros.add(libroNuevo);
+            System.out.println("Libro reemplazado exitosamente: " + libroNuevo.getTitulo());
+        } else {
+            System.out.println("El libro con código " + libroNuevo.getCodigo() + " no existe.");
+        }
+    }
+
+       /*  Método para crear un préstamo*/
+    public void crearPrestamo(String codigo, LocalDate fechaPrestamo, LocalDate fechaEntrega, Bibliotecario bibliotecario, Estudiante estudiante) {
+        Prestamo prestamo = new Prestamo(codigo, fechaPrestamo, fechaEntrega, bibliotecario, estudiante);
+        prestamos.add(prestamo);
+        bibliotecario.getPrestamos().add(prestamo);
+        estudiante.getPrestamos().add(prestamo);
+        System.out.println("Préstamo creado exitosamente: " + prestamo);
+    }
+
+    /*  Método para adicionar un libro al préstamo*/
+    public void adicionarLibroPrestamo(String codigoPrestamo, Libro libro, int cantidad) {
+        Prestamo prestamo = buscarPrestamoPorCodigo(codigoPrestamo);
+        if (prestamo != null) {
+            if (libro.getUnidadesDisponibles() >= cantidad) {
+                libro.setUnidadesDisponibles(libro.getUnidadesDisponibles() - cantidad);
+                DetallePrestamo detalle = new DetallePrestamo(cantidad, prestamo, libro);
+                prestamo.getDetallePrestamos().add(detalle);
+                System.out.println("Libro añadido al préstamo: " + libro.getTitulo());
+            } else {
+                System.out.println("No hay suficientes unidades disponibles para prestar.");
+            }
+        } else {
+            System.out.println("No se encontró el préstamo con código: " + codigoPrestamo);
+        }
+    }
+
+    /*  Método para buscar un préstamo por su código*/
+    public Prestamo buscarPrestamoPorCodigo(String codigo) {
+        for (Prestamo prestamo : prestamos) {
+            if (prestamo.getCodigo().equals(codigo)) {
+                return prestamo;
+            }
+        }
+        return null;
+    }
+
+       /*  Método para obtener el estudiante con más préstamos*/
+       public Estudiante obtenerEstudianteConMasPrestamos() {
+        Estudiante estudianteConMasPrestamos = null;
+        int maxPrestamos = 0;
+        for (Estudiante estudiante : estudiantes) {
+            int prestamos = estudiante.getPrestamos().size();
+            if (prestamos > maxPrestamos) {
+                maxPrestamos = prestamos;
+                estudianteConMasPrestamos = estudiante;
+            }
+        }
+        return estudianteConMasPrestamos;
+    }
+
+    /* Método para calcular el total de dinero recaudado*/
+    public double calcularTotalDineroRecaudado() {
+        double total = 0;
+        for (Prestamo prestamo : prestamos) {
+            total += prestamo.getTotal();
+        }
+        return total;
+    }
+
+    /*  Método para calcular el total a pagar a los bibliotecarios*/
+    public double calcularTotalAPagarBibliotecarios() {
+        double total = 0;
+        for (Bibliotecario bibliotecario : bibliotecarios) {
+            double comision = 0.2 * calcularTotalPrestamosBibliotecario(bibliotecario);
+            double bonificacion = 0.02 * comision * calcularAntiguedad(bibliotecario);
+            total += (comision + bonificacion);
+        }
+        return total;
+    }
+
+    /*  Método para calcular el total de préstamos realizados por un bibliotecario*/
+    public double calcularTotalPrestamosBibliotecario(Bibliotecario bibliotecario) {
+        double total = 0;
+        for (Prestamo prestamo : bibliotecario.getPrestamos()) {
+            total += prestamo.getTotal();
+        }
+        return total;
+    }
+
+    /*  Método para calcular la antigüedad de un bibliotecario en años*/
+    public int calcularAntiguedad(Bibliotecario bibliotecario) {
+        return LocalDate.now().getYear() - bibliotecario.getFechaIngreso().getYear();
+    }
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getTotalDineroRecaudo() {
+        return totalDineroRecaudo;
+    }
+
+    public void setTotalDineroRecaudo(double totalDineroRecaudo) {
+        this.totalDineroRecaudo = totalDineroRecaudo;
+    }
+
+    public Collection<Bibliotecario> getBibliotecarios() {
+        return bibliotecarios;
+    }
+
+    public void setBibliotecarios(Collection<Bibliotecario> bibliotecarios) {
+        this.bibliotecarios = bibliotecarios;
+    }
+
+    public Collection<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(Collection<Prestamo> prestamos) {
+        this.prestamos = prestamos;
+    }
+
+    public Collection<Libro> getLibros() {
+        return libros;
+    }
+
+    public void setLibros(Collection<Libro> libros) {
+        this.libros = libros;
+    }
+
+    public Collection<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(Collection<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+
+    @Override
+    public String toString() {
+        return "Biblioteca [nombre=" + nombre + ", totalDineroRecaudo=" + totalDineroRecaudo + ", bibliotecarios="
+                + bibliotecarios + ", prestamos=" + prestamos + ", libros=" + libros + ", estudiantes=" + estudiantes
+                + "]";
+    }
+
 }
-
-
