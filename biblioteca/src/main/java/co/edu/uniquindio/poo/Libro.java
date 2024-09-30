@@ -12,6 +12,7 @@ public class Libro {
     private int unidadesDisponibles;
     private LocalDate fechaPublicacion;
     private boolean estado;
+    
 /*
  * Metodo constructor de la clase libro
  */
@@ -33,6 +34,8 @@ public class Libro {
             System.out.println("No hay suficientes unidades disponibles para prestar.");
         }
     }
+
+    
     /* Metodo para devolver libros*/
     public void devolver(int cantidad) {
         unidadesDisponibles += cantidad;

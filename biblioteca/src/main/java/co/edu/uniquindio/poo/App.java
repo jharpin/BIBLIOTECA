@@ -65,12 +65,12 @@ public class App {
         biblioteca.crearPrestamo("P001", fechaPrestamo1, fechaEntrega1, bibliotecario1, estudiante1, 1);
         biblioteca.adicionarLibroPrestamo("P001", libro1, 2, 200); // Añadir 2 unidades de "Don Quijote"
         biblioteca.adicionarLibroPrestamo("P001", libro2, 1, 350); // Añadir 1 unidad de "Guerra y Paz"
-
+   
         LocalDate fechaPrestamo3 = LocalDate.now(); // Fecha de préstamo actual
         LocalDate fechaEntrega3 = fechaPrestamo3.plusDays(6); // Fecha de entrega 5 días después
         biblioteca.crearPrestamo("P003", fechaPrestamo3, fechaEntrega3, bibliotecario1, estudiante2, 3);
         biblioteca.adicionarLibroPrestamo("P003", libro1, 2, 200);
-
+        
         LocalDate fechaPrestamo4 = LocalDate.now(); // Fecha de préstamo actual
         LocalDate fechaEntrega4 = fechaPrestamo4.plusDays(7); // Fecha de entrega 5 días después
         biblioteca.crearPrestamo("P004", fechaPrestamo4, fechaEntrega4, bibliotecario1, estudiante2, 4);
@@ -80,6 +80,9 @@ public class App {
         LocalDate fechaEntrega2 = fechaPrestamo2.plusDays(3); // Fecha de entrega 3 días después
         biblioteca.crearPrestamo("P002", fechaPrestamo2, fechaEntrega2, bibliotecario2, estudiante2, 2);
         biblioteca.adicionarLibroPrestamo("P002", libro3, 1, 350); // Añadir 1 unidad de "Hamlet"
+        
+    
+
         /*
          * Metodos para mostrar los detalles de cada prestamo
          */
@@ -142,6 +145,10 @@ public class App {
         int cantidadPrestamos = biblioteca.consultarPrestamosPorTitulo(tituloBuscar);
         System.out.println("El libro '" + tituloBuscar + "' ha sido prestado " + cantidadPrestamos + " veces.");
 
+        String librosRestantes = biblioteca.contarLibrosRestantes();
+        System.out.println(librosRestantes);
+
+
         /* Reporte: Estudiante con más préstamos */
         Estudiante estudianteConMasPrestamos = biblioteca.obtenerEstudianteConMasPrestamos();
         if (estudianteConMasPrestamos != null) {
@@ -154,6 +161,26 @@ public class App {
         } else {
             System.out.println("No hay préstamos realizados por estudiantes.");
         }
+/*
+ * 
+ */
+        String codigoPrestamoBuscar = "P001"; // Código del préstamo que deseas buscar
+    Prestamo prestamoEncontrado = biblioteca.buscarPrestamoPorCodigo(codigoPrestamoBuscar);
+    
+    if (prestamoEncontrado != null) {
+        System.out.println("Préstamo encontrado: " + prestamoEncontrado.getCodigo());
+        // Aquí puedes mostrar más detalles del préstamo encontrado si es necesario
+        System.out.println("Detalles del préstamo:");
+        System.out.println("Fecha de préstamo: " + prestamoEncontrado.getFechaPrestamo());
+        System.out.println("Fecha de entrega: " + prestamoEncontrado.getFechaEntrega());
+        // Puedes iterar sobre el detalle del préstamo si tienes esa información
+        for (DetallePrestamo detalle : prestamoEncontrado.getDetallePrestamos()) {
+            System.out.println(detalle.toString());
+        }
+    } else {
+        System.out.println("No se encontró el préstamo con código: " + codigoPrestamoBuscar);
+    }
+
 
         /* Reporte: Total de dinero recaudado */
         double totalRecaudado = biblioteca.calcularTotalDineroRecaudado();

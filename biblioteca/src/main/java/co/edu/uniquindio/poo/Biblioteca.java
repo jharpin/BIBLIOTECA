@@ -112,9 +112,15 @@ public class Biblioteca {
         Prestamo prestamo = buscarPrestamoPorCodigo(codigoPrestamo);
         if (prestamo != null) {
             DetallePrestamo detalle = new DetallePrestamo(cantidad, prestamo, libro, costoPorDia);
-            prestamo.agregarDetallePrestamo(detalle); // Asegúrate de que esto esté llamando correctamente
+            prestamo.agregarDetallePrestamo(detalle);
+            libro.prestar(cantidad);
+        } else {
+            System.out.println("Préstamo no encontrado con el código: " + codigoPrestamo);
         }
     }
+            
+        
+    
     
     /*  Método para buscar un préstamo por su código*/
     public Prestamo buscarPrestamoPorCodigo(String codigo) {
@@ -168,6 +174,18 @@ public class Biblioteca {
         }
         return total;
     }
+/*
+ * Metodo para contar los libros restantes
+ */
+public String contarLibrosRestantes() {
+    StringBuilder report = new StringBuilder("Libros restantes en la biblioteca:\n");
+
+    for (Libro libro : libros) {
+        report.append(libro.getTitulo()).append(": ").append(libro.getUnidadesDisponibles()).append("\n");
+    }
+
+    return report.toString();
+}
 
     /*  Método para calcular la antigüedad de un bibliotecario en años*/
     public int calcularAntiguedad(Bibliotecario bibliotecario) {
