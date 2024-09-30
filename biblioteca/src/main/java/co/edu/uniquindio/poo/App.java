@@ -8,8 +8,10 @@ public class App {
         Biblioteca biblioteca = new Biblioteca("Biblioteca Central", 0);
 
         /* Crear y agregar bibliotecarios */
-        Bibliotecario bibliotecario1 = new Bibliotecario("Maria López", "12345678", "maria@mail.com", 123456, 2000, LocalDate.of(2015, 1, 1));
-        Bibliotecario bibliotecario2 = new Bibliotecario("Juan Pérez", "87654321", "juan@mail.com", 654321, 2500, LocalDate.of(2018, 5, 10));
+        Bibliotecario bibliotecario1 = new Bibliotecario("Maria López", "12345678", "maria@mail.com", 123456, 2000,
+                LocalDate.of(2015, 1, 1));
+        Bibliotecario bibliotecario2 = new Bibliotecario("Juan Pérez", "87654321", "juan@mail.com", 654321, 2500,
+                LocalDate.of(2018, 5, 10));
         biblioteca.agregarBibliotecario(bibliotecario1);
         biblioteca.agregarBibliotecario(bibliotecario2);
 
@@ -20,9 +22,12 @@ public class App {
         biblioteca.agregarEstudiante(estudiante2);
 
         /* Crear y agregar libros */
-        Libro libro1 = new Libro("001", "ISBN123", "Cervantes", "Don Quijote", "Editorial1", 30, LocalDate.of(2020, 1, 1));
-        Libro libro2 = new Libro("002", "ISBN124", "Tolstoy", "Guerra y Paz", "Editorial2", 15, LocalDate.of(2021, 5, 5));
-        Libro libro3 = new Libro("003", "ISBN125", "Shakespeare", "Hamlet", "Editorial3", 20, LocalDate.of(2019, 3, 12));
+        Libro libro1 = new Libro("001", "ISBN123", "Cervantes", "Don Quijote", "Editorial1", 30,
+                LocalDate.of(2020, 1, 1));
+        Libro libro2 = new Libro("002", "ISBN124", "Tolstoy", "Guerra y Paz", "Editorial2", 15,
+                LocalDate.of(2021, 5, 5));
+        Libro libro3 = new Libro("003", "ISBN125", "Shakespeare", "Hamlet", "Editorial3", 20,
+                LocalDate.of(2019, 3, 12));
         biblioteca.agregarLibro(libro1);
         biblioteca.agregarLibro(libro2);
         biblioteca.agregarLibro(libro3);
@@ -34,7 +39,8 @@ public class App {
         }
 
         /* Reemplazar un libro existente */
-        Libro libroNuevo = new Libro("001", "ISBN125", "Cervantes", "El principito", "Editorial1", 25, LocalDate.of(2024, 1, 1));
+        Libro libroNuevo = new Libro("001", "ISBN125", "Cervantes", "El principito", "Editorial1", 25,
+                LocalDate.of(2024, 1, 1));
         biblioteca.reemplazarLibro(libroNuevo);
 
         /* Mostrar libros después del reemplazo */
@@ -47,7 +53,8 @@ public class App {
         String codigoBuscar = "001";
         Libro libroEncontrado = biblioteca.buscarLibroPorCodigo(codigoBuscar);
         if (libroEncontrado != null) {
-            System.out.println("Libro encontrado: " + libroEncontrado.getTitulo() + " por " + libroEncontrado.getAutor());
+            System.out
+                    .println("Libro encontrado: " + libroEncontrado.getTitulo() + " por " + libroEncontrado.getAutor());
         } else {
             System.out.println("No se encontró ningún libro con el código: " + codigoBuscar);
         }
@@ -59,11 +66,51 @@ public class App {
         biblioteca.adicionarLibroPrestamo("P001", libro1, 2, 200); // Añadir 2 unidades de "Don Quijote"
         biblioteca.adicionarLibroPrestamo("P001", libro2, 1, 350); // Añadir 1 unidad de "Guerra y Paz"
 
+        LocalDate fechaPrestamo3 = LocalDate.now(); // Fecha de préstamo actual
+        LocalDate fechaEntrega3 = fechaPrestamo3.plusDays(6); // Fecha de entrega 5 días después
+        biblioteca.crearPrestamo("P003", fechaPrestamo3, fechaEntrega3, bibliotecario1, estudiante2, 3);
+        biblioteca.adicionarLibroPrestamo("P003", libro1, 2, 200);
+
+        LocalDate fechaPrestamo4 = LocalDate.now(); // Fecha de préstamo actual
+        LocalDate fechaEntrega4 = fechaPrestamo4.plusDays(7); // Fecha de entrega 5 días después
+        biblioteca.crearPrestamo("P004", fechaPrestamo4, fechaEntrega4, bibliotecario1, estudiante2, 4);
+        biblioteca.adicionarLibroPrestamo("P004", libro1, 3, 200);
+
         LocalDate fechaPrestamo2 = LocalDate.now(); // Fecha de préstamo actual
         LocalDate fechaEntrega2 = fechaPrestamo2.plusDays(3); // Fecha de entrega 3 días después
         biblioteca.crearPrestamo("P002", fechaPrestamo2, fechaEntrega2, bibliotecario2, estudiante2, 2);
         biblioteca.adicionarLibroPrestamo("P002", libro3, 1, 350); // Añadir 1 unidad de "Hamlet"
-
+        /*
+         * Metodos para mostrar los detalles de cada prestamo
+         */
+        Prestamo prestamoP001 = biblioteca.buscarPrestamoPorCodigo("P001");
+        if (prestamoP001 != null) {
+            System.out.println("Préstamo P001 detalles: ");
+            for (DetallePrestamo detalle : prestamoP001.getDetallePrestamos()) {
+                System.out.println(detalle.toString());
+            }
+        }
+        Prestamo prestamoP002 = biblioteca.buscarPrestamoPorCodigo("P002");
+        if (prestamoP002 != null) {
+            System.out.println("Préstamo P002 detalles: ");
+            for (DetallePrestamo detalle : prestamoP002.getDetallePrestamos()) {
+                System.out.println(detalle.toString());
+            }
+        }
+        Prestamo prestamoP003 = biblioteca.buscarPrestamoPorCodigo("P003");
+        if (prestamoP003 != null) {
+            System.out.println("Préstamo P001 detalles: ");
+            for (DetallePrestamo detalle : prestamoP003.getDetallePrestamos()) {
+                System.out.println(detalle.toString());
+            }
+        }
+        Prestamo prestamoP004 = biblioteca.buscarPrestamoPorCodigo("P004");
+        if (prestamoP004 != null) {
+            System.out.println("Préstamo P004 detalles: ");
+            for (DetallePrestamo detalle : prestamoP004.getDetallePrestamos()) {
+                System.out.println(detalle.toString());
+            }
+        }
         /* Entregar préstamos y calcular el costo */
         System.out.println("\n--- Entregando Préstamos ---");
         entregarPrestamo(biblioteca, "P001", fechaEntrega1); // Entregar según la fecha establecida
@@ -91,14 +138,19 @@ public class App {
         System.out.println("\n--- Reportes de la Biblioteca ---");
 
         /* Contador de veces que se ha prestado un libro por su título */
-        String tituloBuscar = "Hamlet"; 
+        String tituloBuscar = "Hamlet";
         int cantidadPrestamos = biblioteca.consultarPrestamosPorTitulo(tituloBuscar);
-        System.out.println("El libro '" + tituloBuscar + "' ha sido prestado " + cantidadPrestamos + " veces.");    
+        System.out.println("El libro '" + tituloBuscar + "' ha sido prestado " + cantidadPrestamos + " veces.");
 
         /* Reporte: Estudiante con más préstamos */
         Estudiante estudianteConMasPrestamos = biblioteca.obtenerEstudianteConMasPrestamos();
         if (estudianteConMasPrestamos != null) {
             System.out.println("Estudiante con más préstamos: " + estudianteConMasPrestamos.getNombre());
+            System.out.println("Nombre: " + estudianteConMasPrestamos.getNombre());
+            System.out.println("Cédula: " + estudianteConMasPrestamos.getCedula());
+            System.out.println("Email: " + estudianteConMasPrestamos.getCorreo());
+            System.out.println("Teléfono: " + estudianteConMasPrestamos.getTelefono());
+            System.out.println("Número de préstamos: " + estudianteConMasPrestamos.getPrestamos().size());
         } else {
             System.out.println("No hay préstamos realizados por estudiantes.");
         }
@@ -114,7 +166,8 @@ public class App {
         /* Reporte: Cantidad de préstamos realizados por cada bibliotecario */
         System.out.println("\n--- Información de los Bibliotecarios ---");
         for (Bibliotecario bibliotecario : biblioteca.getBibliotecarios()) {
-            System.out.println("Bibliotecario: " + bibliotecario.getNombre() + ", Préstamos realizados: " + bibliotecario.getPrestamos().size());
+            System.out.println("Bibliotecario: " + bibliotecario.getNombre() + ", Préstamos realizados: "
+                    + bibliotecario.getPrestamos().size());
         }
     }
 }
