@@ -149,14 +149,17 @@ public class Biblioteca {
 /*
  * Metodo para consultar los prestamos que estan involucrados por libro
  */
-    public int PrestamosPorLibro (String titulo) {
+    public int prestamosPorLibro (String titulo) {
         int contador = 0;
         for (Prestamo prestamo: prestamos) {
             for (Libro libro : prestamo.getLibros()){
-                if (libro.getTitulo())
+                if (libro.getTitulo().equals(titulo)) {
+                    contador++;
+                }
             }
 
         }
-        
+        return contador;
     }
 }
+
