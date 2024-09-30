@@ -148,7 +148,7 @@ public class Biblioteca {
     }
 /*
  * Metodo para consultar los prestamos que estan involucrados por libro
- */
+ *
     public int prestamosPorLibro (String titulo) {
         int contador = 0;
         for (Prestamo prestamo: prestamos) {
@@ -161,5 +161,7 @@ public class Biblioteca {
         }
         return contador;
     }
+*/
 }
+
 
