@@ -13,41 +13,54 @@ public class Prestamo {
     private Bibliotecario bibliotecario;
     private Estudiante estudiante;
     private Collection<DetallePrestamo> detallePrestamos;
+    private int id;
 
     public Prestamo(String codigo, LocalDate fechaPrestamo, LocalDate fechaEntrega, Bibliotecario bibliotecario,
-            Estudiante estudiante) {
+            Estudiante estudiante, int id) {
         this.codigo = codigo;
         this.fechaEntrega = fechaEntrega;
         this.fechaPrestamo = fechaPrestamo;
         detallePrestamos = new LinkedList<>();
-        this.total = calcularTotal();
+        this.bibliotecario = bibliotecario;
+        this.estudiante = estudiante;
+        this.id = id;
     }
 
-    /*Método para calcular el total del préstamo*/
+    /* Método para calcular el total del préstamo */
     public double calcularTotal() {
         double total = 0;
-        for (DetallePrestamo detallePrestamo : detallePrestamos) {
-            total += detallePrestamo.calcularSubtotal(); // Sumar el subtotal de cada detalle de préstamo
+        for (DetallePrestamo detalle : detallePrestamos) {
+            total += detalle.calcularSubtotal();
         }
         return total;
     }
 
-    /*  Método para calcular la cantidad de días del préstamo*/
+    /* Método para calcular la cantidad de días del préstamo */
     public long calcularDiasPrestamo() {
-        return ChronoUnit.DAYS.between(fechaPrestamo, fechaEntrega); // Días entre la fecha de préstamo y entrega
-    }
-    /*Metodo para agregar detalles al prestamo */
-    public void agregarDetallePrestamo(DetallePrestamo detalle) {
-        detallePrestamos.add(detalle);
-        this.total = calcularTotal(); 
+        return ChronoUnit.DAYS.between(fechaPrestamo, fechaEntrega);
     }
 
+    /* Método para agregar detalles al préstamo */
+    public void agregarDetallePrestamo(DetallePrestamo detalle) {
+        detallePrestamos.add(detalle);
+        this.total = calcularTotal(); // Asegura que el total se actualice
+    }
+    // Getters y setters...
+    
     public String getCodigo() {
         return codigo;
     }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public LocalDate getFechaPrestamo() {
@@ -68,10 +81,6 @@ public class Prestamo {
 
     public double getTotal() {
         return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
     }
 
     public Bibliotecario getBibliotecario() {
@@ -100,9 +109,16 @@ public class Prestamo {
 
     @Override
     public String toString() {
-        return "Prestamo [codigo=" + codigo + ", fechaPrestamo=" + fechaPrestamo + ", fechaEntrega=" + fechaEntrega
-                + ", total=" + total + ", bibliotecario=" + bibliotecario + ", estudiante=" + estudiante
-                + ", detallePrestamos=" + detallePrestamos + "]";
+        this.total = calcularTotal(); // Recalcula el total antes de mostrarlo
+        String detalles = detallePrestamos.isEmpty() ? "No hay detalles de préstamo" : detallePrestamos.toString();
+        return "Préstamo [ID=" + id +
+               ", Código=" + codigo +
+               ", Fecha de Préstamo=" + fechaPrestamo +
+               ", Fecha de Entrega=" + fechaEntrega +
+               ", Bibliotecario=" + (bibliotecario != null ? bibliotecario.getNombre() : "No asignado") +
+               ", Estudiante=" + (estudiante != null ? estudiante.getNombre() : "No asignado") +
+               ", Total=" + total +
+               ", Detalle de Préstamos=" + detalles + "]";
     }
-
 }
+

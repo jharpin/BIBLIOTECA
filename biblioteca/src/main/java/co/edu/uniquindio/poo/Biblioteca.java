@@ -99,8 +99,8 @@ public class Biblioteca {
     }
 
        /*  Método para crear un préstamo*/
-    public void crearPrestamo(String codigo, LocalDate fechaPrestamo, LocalDate fechaEntrega, Bibliotecario bibliotecario, Estudiante estudiante) {
-        Prestamo prestamo = new Prestamo(codigo, fechaPrestamo, fechaEntrega, bibliotecario, estudiante);
+    public void crearPrestamo(String codigo, LocalDate fechaPrestamo, LocalDate fechaEntrega, Bibliotecario bibliotecario, Estudiante estudiante,int id) {
+        Prestamo prestamo = new Prestamo(codigo, fechaPrestamo, fechaEntrega, bibliotecario, estudiante,id);
         prestamos.add(prestamo);
         bibliotecario.getPrestamos().add(prestamo);
         estudiante.getPrestamos().add(prestamo);
@@ -108,22 +108,14 @@ public class Biblioteca {
     }
 
     /*  Método para adicionar un libro al préstamo*/
-    public void adicionarLibroPrestamo(String codigoPrestamo, Libro libro, int cantidad) {
+    public void adicionarLibroPrestamo(String codigoPrestamo, Libro libro, int cantidad, double costoPorDia) {
         Prestamo prestamo = buscarPrestamoPorCodigo(codigoPrestamo);
         if (prestamo != null) {
-            if (libro.getUnidadesDisponibles() >= cantidad) {
-                libro.setUnidadesDisponibles(libro.getUnidadesDisponibles() - cantidad);
-                DetallePrestamo detalle = new DetallePrestamo(cantidad, prestamo, libro);
-                prestamo.getDetallePrestamos().add(detalle);
-                System.out.println("Libro añadido al préstamo: " + libro.getTitulo());
-            } else {
-                System.out.println("No hay suficientes unidades disponibles para prestar.");
-            }
-        } else {
-            System.out.println("No se encontró el préstamo con código: " + codigoPrestamo);
+            DetallePrestamo detalle = new DetallePrestamo(cantidad, prestamo, libro, costoPorDia);
+            prestamo.agregarDetallePrestamo(detalle); // Asegúrate de que esto esté llamando correctamente
         }
     }
-
+    
     /*  Método para buscar un préstamo por su código*/
     public Prestamo buscarPrestamoPorCodigo(String codigo) {
         for (Prestamo prestamo : prestamos) {
